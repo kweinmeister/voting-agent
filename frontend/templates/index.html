@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Voting Agent</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/static/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/marked@15/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3/dist/purify.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>🗳️ Voting Agent</h1>
+        <p class="subtitle">
+          Generates multiple ad copy options in parallel and selects the best one.
+          Enter a product description to get started.
+        </p>
+        <span class="mode-badge" id="mode-badge">{{ mode }}</span>
+      </header>
+
+      <form id="voting-form" class="run-form">
+        <input
+          type="text"
+          name="prompt"
+          id="prompt-input"
+          class="form-input"
+          placeholder="e.g. A smart coffee mug that keeps your drink hot for hours."
+          autocomplete="off"
+        />
+        <button type="submit" id="submit-btn" class="btn-primary">Run Agent</button>
+      </form>
+
+      <div id="results-container" class="results-grid">
+        <div id="parallel-section">
+          <h2 class="section-header">Parallel Generations</h2>
+          <div class="voting-results-grid">
+            <div class="result-card result-card-humorous">
+              <h3>😄 Humorous</h3>
+              <div id="result-humorous" class="content"></div>
+            </div>
+            <div class="result-card result-card-professional">
+              <h3>💼 Professional</h3>
+              <div id="result-professional" class="content"></div>
+            </div>
+            <div class="result-card result-card-urgent">
+              <h3>⚡ Urgent</h3>
+              <div id="result-urgent" class="content"></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="judge-section">
+          <h2 class="section-header judge-header">Judge's Decision</h2>
+          <div class="result-card result-card-judge">
+            <h3>🏆 Winner</h3>
+            <div id="result-judge" class="content markdown-body"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="/static/stream-handler.js"></script>
+    <script src="/static/voting.js"></script>
+  </body>
+</html>
