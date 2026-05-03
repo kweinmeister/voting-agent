@@ -1,0 +1,20 @@
+# Inherit .gitignore patterns
+#!include:.gitignore
+
+# Dev tooling and config — not needed in the build context
+.github/
+terraform/
+tests/
+biome.json
+mise.toml
+
+# Docs and metadata
+README.md
+GEMINI.md
+LICENSE
+deployment_metadata.json
+
+# Cache dirs not covered by .gitignore
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/

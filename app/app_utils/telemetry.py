@@ -19,21 +19,23 @@ import os
 def setup_telemetry() -> str | None:
     """Configure OpenTelemetry and GenAI telemetry with GCS upload."""
     os.environ.setdefault("GOOGLE_CLOUD_AGENT_ENGINE_ENABLE_TELEMETRY", "true")
+    # Always required: enables the gen_ai semantic conventions used by ADK and
+    # the online monitor evaluation service to read traces.
+    os.environ.setdefault("OTEL_SEMCONV_STABILITY_OPT_IN", "gen_ai_latest_experimental")
+    # Keep message content in events (EVENT_ONLY), not span attributes — prevents
+    # PII in spans and avoids exceeding the OTel attribute size limit.
+    os.environ.setdefault("ADK_CAPTURE_MESSAGE_CONTENT_IN_SPANS", "false")
 
     bucket = os.environ.get("LOGS_BUCKET_NAME")
     capture_content = os.environ.get(
-        "OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT", "false"
+        "OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT",
+        "false",
     )
     if bucket and capture_content != "false":
-        logging.info(
-            "Prompt-response logging enabled - mode: NO_CONTENT (metadata only, no prompts/responses)"
-        )
+        # GCS upload mode: content goes to GCS (audit log), stripped from traces.
         os.environ["OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT"] = "NO_CONTENT"
         os.environ.setdefault("OTEL_INSTRUMENTATION_GENAI_UPLOAD_FORMAT", "jsonl")
         os.environ.setdefault("OTEL_INSTRUMENTATION_GENAI_COMPLETION_HOOK", "upload")
-        os.environ.setdefault(
-            "OTEL_SEMCONV_STABILITY_OPT_IN", "gen_ai_latest_experimental"
-        )
         commit_sha = os.environ.get("COMMIT_SHA", "dev")
         os.environ.setdefault(
             "OTEL_RESOURCE_ATTRIBUTES",
@@ -44,9 +46,16 @@ def setup_telemetry() -> str | None:
             "OTEL_INSTRUMENTATION_GENAI_UPLOAD_BASE_PATH",
             f"gs://{bucket}/{path}",
         )
-    else:
         logging.info(
-            "Prompt-response logging disabled (set LOGS_BUCKET_NAME=gs://your-bucket and OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT=NO_CONTENT to enable)"
+            "Prompt-response logging enabled - mode: NO_CONTENT (metadata only, no prompts/responses)",
+        )
+    else:
+        # Force EVENT_ONLY — the Agent Platform pre-sets this to "true" (invalid),
+        # so setdefault is insufficient; we override to ensure content is captured
+        # in Cloud Trace events for online monitor scoring.
+        os.environ["OTEL_INSTRUMENTATION_GENAI_CAPTURE_MESSAGE_CONTENT"] = "EVENT_ONLY"
+        logging.info(
+            "Prompt-response logging: EVENT_ONLY (captures in Cloud Trace for online monitors)",
         )
 
     return bucket

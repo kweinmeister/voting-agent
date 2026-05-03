@@ -1,0 +1,33 @@
+version: 2
+updates:
+  # Python dependencies (uv ecosystem)
+  - package-ecosystem: uv
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    groups:
+      google-cloud:
+        patterns:
+          - "google-*"
+          - "vertexai"
+      testing:
+        patterns:
+          - "pytest*"
+
+  # GitHub Actions
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+
+  # Terraform providers
+  - package-ecosystem: terraform
+    directory: /terraform
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 3

@@ -1,0 +1,44 @@
+name: Eval
+
+on:
+  workflow_dispatch:
+    inputs:
+      gcs_eval_bucket:
+        description: "GCS URI for eval output (e.g. gs://my-bucket/evals)"
+        required: true
+      agent_resource_name:
+        description: "Agent Runtime resource name (leave blank to use deployment_metadata.json)"
+        required: false
+        default: ""
+
+jobs:
+  platform-eval:
+    name: Agent Platform Eval
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ vars.WIF_PROVIDER }}
+          service_account: ${{ vars.GHA_SERVICE_ACCOUNT }}
+
+      - uses: astral-sh/setup-uv@v8
+        with:
+          python-version: "3.11"
+
+      - name: Install eval dependencies
+        run: uv sync --extra eval
+
+      - name: Run Agent Platform eval
+        env:
+          GCP_PROJECT_ID: ${{ vars.GCP_PROJECT_ID }}
+          GCS_EVAL_BUCKET: ${{ inputs.gcs_eval_bucket }}
+          AGENT_RESOURCE_NAME: ${{ inputs.agent_resource_name }}
+          GCP_REGION: us-east1
+        run: uv run python tests/eval/run_platform_eval.py

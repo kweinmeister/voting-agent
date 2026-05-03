@@ -21,18 +21,17 @@ from app.agent import root_agent
 
 
 def test_agent_stream() -> None:
-    """
-    Integration test for the agent stream functionality.
+    """Integration test for the agent stream functionality.
     Tests that the agent returns valid streaming responses.
     """
-
     session_service = InMemorySessionService()
 
     session = session_service.create_session_sync(user_id="test_user", app_name="test")
     runner = Runner(agent=root_agent, session_service=session_service, app_name="test")
 
     message = types.Content(
-        role="user", parts=[types.Part.from_text(text="Why is the sky blue?")]
+        role="user",
+        parts=[types.Part.from_text(text="Why is the sky blue?")],
     )
 
     events = list(
@@ -41,7 +40,7 @@ def test_agent_stream() -> None:
             user_id="test_user",
             session_id=session.id,
             run_config=RunConfig(streaming_mode=StreamingMode.SSE),
-        )
+        ),
     )
     assert len(events) > 0, "Expected at least one message"
 

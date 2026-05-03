@@ -1,0 +1,157 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  # Detect which parts of the codebase changed to avoid unnecessary deploys.
+  changes:
+    name: Detect changes
+    runs-on: ubuntu-latest
+    outputs:
+      frontend: ${{ steps.filter.outputs.frontend }}
+      agent: ${{ steps.filter.outputs.agent }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            frontend:
+              - 'frontend/**'
+              - 'app/**'
+              - 'Dockerfile'
+              - 'pyproject.toml'
+              - 'uv.lock'
+            agent:
+              - 'app/**'
+              - 'pyproject.toml'
+              - 'uv.lock'
+
+  # ── Frontend: build image + deploy Cloud Run ────────────────────────────────
+  deploy-frontend:
+    name: Deploy Frontend
+    needs: changes
+    if: needs.changes.outputs.frontend == 'true' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+
+    env:
+      REGION: us-central1
+      IMAGE: us-central1-docker.pkg.dev/${{ vars.GCP_PROJECT_ID }}/voting-agent/voting-agent-frontend:${{ github.sha }}
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ vars.WIF_PROVIDER }}
+          service_account: ${{ vars.GHA_SERVICE_ACCOUNT }}
+
+      - uses: google-github-actions/setup-gcloud@v2
+
+      - name: Build and push container image
+        run: |
+          gcloud builds submit . \
+            --tag=${{ env.IMAGE }} \
+            --project=${{ vars.GCP_PROJECT_ID }} \
+            --quiet
+
+      - name: Deploy to Cloud Run
+        run: |
+          gcloud run deploy voting-agent-frontend \
+            --image=${{ env.IMAGE }} \
+            --region=${{ env.REGION }} \
+            --project=${{ vars.GCP_PROJECT_ID }} \
+            --quiet
+
+  # ── Agent: redeploy Agent Runtime via agents-cli ────────────────────────────
+  deploy-agent:
+    name: Deploy Agent Runtime
+    needs: [changes, deploy-frontend]
+    if: always() && (needs.changes.outputs.agent == 'true' || github.event_name == 'workflow_dispatch') && (needs.deploy-frontend.result == 'success' || needs.deploy-frontend.result == 'skipped')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    outputs:
+      agent_resource_name: ${{ steps.get-agent-id.outputs.agent_resource_name }}
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ vars.WIF_PROVIDER }}
+          service_account: ${{ vars.GHA_SERVICE_ACCOUNT }}
+
+      - uses: google-github-actions/setup-gcloud@v2
+
+      - uses: astral-sh/setup-uv@v8
+        with:
+          python-version: "3.11"
+
+      - name: Install agents-cli
+        run: uv tool install google-agents-cli
+
+      - name: Deploy agent to Agent Runtime
+        run: agents-cli deploy --no-confirm-project
+
+      - name: Get agent resource name
+        id: get-agent-id
+        run: |
+          AGENT_ID=$(python3 -c "
+          import json
+          print(json.load(open('deployment_metadata.json'))['remote_agent_runtime_id'])
+          ")
+          echo "agent_resource_name=$AGENT_ID" >> $GITHUB_OUTPUT
+
+      - name: Wire new Agent Runtime ID into Cloud Run
+        run: |
+          echo "New agent resource: ${{ steps.get-agent-id.outputs.agent_resource_name }}"
+          gcloud run services update voting-agent-frontend \
+            --region=us-central1 \
+            --project=${{ vars.GCP_PROJECT_ID }} \
+            --update-env-vars=AGENT_RESOURCE_NAME=${{ steps.get-agent-id.outputs.agent_resource_name }} \
+            --quiet
+
+  # ── Eval: run Agent Platform eval after agent deploy ────────────────────────
+  eval:
+    name: Run Eval
+    needs: deploy-agent
+    if: needs.deploy-agent.result == 'success'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ vars.WIF_PROVIDER }}
+          service_account: ${{ vars.GHA_SERVICE_ACCOUNT }}
+
+      - uses: astral-sh/setup-uv@v8
+        with:
+          python-version: "3.11"
+
+      - name: Install eval dependencies
+        run: uv sync --extra eval
+
+      - name: Run Agent Platform eval
+        env:
+          GCP_PROJECT_ID: ${{ vars.GCP_PROJECT_ID }}
+          GCS_EVAL_BUCKET: ${{ vars.GCS_EVAL_BUCKET }}
+          AGENT_RESOURCE_NAME: ${{ needs.deploy-agent.outputs.agent_resource_name }}
+          GCP_REGION: us-east1
+          EVAL_REGION: us-central1
+        run: uv run python tests/eval/run_platform_eval.py

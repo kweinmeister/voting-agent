@@ -262,6 +262,11 @@ testem.log
 Thumbs.db
 *.vscode*
 
+# Terraform — state files can contain secrets; tfvars contains project IDs
+terraform/terraform.tfvars
+terraform/terraform.tfstate
+terraform/terraform.tfstate.backup
+
 # Agent CLI specific
 .persist_vector_store
 tests/load_test/.results/*.html
