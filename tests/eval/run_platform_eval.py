@@ -120,7 +120,9 @@ def _print_per_prompt_results(gcs_dest: str, run_name: str) -> None:
                 for metric_name, result in candidate.get("metricResults", {}).items():
                     score = result.get("score")
                     verdict = result.get("verdict", "")
-                    score_str = f"{score:.3f}" if isinstance(score, float) else str(score)
+                    score_str = (
+                        f"{score:.3f}" if isinstance(score, float) else str(score)
+                    )
                     print(f"    Metric: {metric_name} = {score_str} ({verdict})")
 
 
@@ -186,7 +188,9 @@ def main() -> None:
         if run_results.summary_metrics.failed_items:
             print(f"Failed items: {run_results.summary_metrics.failed_items}")
 
-    print(f"\nView evaluation run in console: https://console.cloud.google.com/vertex-ai/locations/{eval_location}/evaluation-runs/{run_id}?project={project}")
+    print(
+        f"\nView evaluation run in console: https://console.cloud.google.com/vertex-ai/locations/{eval_location}/evaluation-runs/{run_id}?project={project}"
+    )
 
     _print_per_prompt_results(gcs_dest, run_name)
 

@@ -38,6 +38,8 @@ jobs:
   unit-tests:
     name: Unit Tests
     runs-on: ubuntu-latest
+    env:
+      GOOGLE_CLOUD_PROJECT: "placeholder-project"
     steps:
       - uses: actions/checkout@v6
 
