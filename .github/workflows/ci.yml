@@ -1,6 +1,7 @@
+---
 name: CI
 
-on:
+"on":
   push:
     branches: ["**"]
   pull_request:
@@ -13,7 +14,9 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - uses: astral-sh/setup-uv@v8
+      # yamllint disable rule:line-length
+      - uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b  # v8.1.0
+        # yamllint enable rule:line-length
         with:
           python-version: "3.11"
 
@@ -38,7 +41,9 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - uses: astral-sh/setup-uv@v8
+      # yamllint disable rule:line-length
+      - uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b  # v8.1.0
+        # yamllint enable rule:line-length
         with:
           python-version: "3.11"
 

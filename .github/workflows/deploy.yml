@@ -1,6 +1,7 @@
+---
 name: Deploy
 
-on:
+"on":
   push:
     branches: [main]
   workflow_dispatch:
@@ -34,7 +35,7 @@ jobs:
   deploy-frontend:
     name: Deploy Frontend
     needs: changes
-    if: needs.changes.outputs.frontend == 'true' || github.event_name == 'workflow_dispatch'
+    if: needs.changes.outputs.frontend == 'true' || github.event_name == 'workflow_dispatch'  # yamllint disable-line rule:line-length
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -42,7 +43,7 @@ jobs:
 
     env:
       REGION: us-central1
-      IMAGE: us-central1-docker.pkg.dev/${{ vars.GCP_PROJECT_ID }}/voting-agent/voting-agent-frontend:${{ github.sha }}
+      IMAGE: us-central1-docker.pkg.dev/${{ vars.GCP_PROJECT_ID }}/voting-agent/voting-agent-frontend:${{ github.sha }}  # yamllint disable-line rule:line-length
 
     steps:
       - uses: actions/checkout@v6
@@ -74,7 +75,7 @@ jobs:
   deploy-agent:
     name: Deploy Agent Runtime
     needs: [changes, deploy-frontend]
-    if: always() && (needs.changes.outputs.agent == 'true' || github.event_name == 'workflow_dispatch') && (needs.deploy-frontend.result == 'success' || needs.deploy-frontend.result == 'skipped')
+    if: always() && (needs.changes.outputs.agent == 'true' || github.event_name == 'workflow_dispatch') && (needs.deploy-frontend.result == 'success' || needs.deploy-frontend.result == 'skipped')  # yamllint disable-line rule:line-length
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -93,7 +94,9 @@ jobs:
 
       - uses: google-github-actions/setup-gcloud@v2
 
-      - uses: astral-sh/setup-uv@v8
+      # yamllint disable rule:line-length
+      - uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b  # v8.1.0
+        # yamllint enable rule:line-length
         with:
           python-version: "3.11"
 
@@ -112,6 +115,7 @@ jobs:
           ")
           echo "agent_resource_name=$AGENT_ID" >> $GITHUB_OUTPUT
 
+      # yamllint disable rule:line-length
       - name: Wire new Agent Runtime ID into Cloud Run
         run: |
           echo "New agent resource: ${{ steps.get-agent-id.outputs.agent_resource_name }}"
@@ -120,6 +124,7 @@ jobs:
             --project=${{ vars.GCP_PROJECT_ID }} \
             --update-env-vars=AGENT_RESOURCE_NAME=${{ steps.get-agent-id.outputs.agent_resource_name }} \
             --quiet
+      # yamllint enable rule:line-length
 
   # ── Eval: run Agent Platform eval after agent deploy ────────────────────────
   eval:
@@ -140,7 +145,9 @@ jobs:
           workload_identity_provider: ${{ vars.WIF_PROVIDER }}
           service_account: ${{ vars.GHA_SERVICE_ACCOUNT }}
 
-      - uses: astral-sh/setup-uv@v8
+      # yamllint disable rule:line-length
+      - uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b  # v8.1.0
+        # yamllint enable rule:line-length
         with:
           python-version: "3.11"
 
@@ -151,7 +158,7 @@ jobs:
         env:
           GCP_PROJECT_ID: ${{ vars.GCP_PROJECT_ID }}
           GCS_EVAL_BUCKET: ${{ vars.GCS_EVAL_BUCKET }}
-          AGENT_RESOURCE_NAME: ${{ needs.deploy-agent.outputs.agent_resource_name }}
+          AGENT_RESOURCE_NAME: ${{ needs.deploy-agent.outputs.agent_resource_name }}  # yamllint disable-line rule:line-length
           GCP_REGION: us-east1
           EVAL_REGION: us-central1
         run: uv run python tests/eval/run_platform_eval.py

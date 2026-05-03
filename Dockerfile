@@ -2,8 +2,9 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
+RUN pip install uv
 COPY pyproject.toml uv.lock ./
-RUN pip install uv && uv sync --no-dev --no-editable
+RUN uv sync --no-dev --no-editable
 
 COPY app/ ./app/
 COPY frontend/ ./frontend/

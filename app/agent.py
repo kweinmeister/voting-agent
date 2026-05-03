@@ -1,3 +1,4 @@
+import logging
 import os
 
 import google.auth
@@ -44,8 +45,8 @@ Do not include any text, preamble, or explanation outside of these four sections
 async def _save_to_memory(callback_context: CallbackContext) -> None:
     try:
         await callback_context.add_session_to_memory()
-    except Exception:
-        pass  # Memory Bank not configured in local dev
+    except Exception as e:
+        logging.warning("Could not save to Memory Bank (expected in local dev): %s", e)
 
 
 root_agent = Agent(

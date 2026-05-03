@@ -1,13 +1,14 @@
+---
 name: Eval
 
-on:
+"on":
   workflow_dispatch:
     inputs:
       gcs_eval_bucket:
         description: "GCS URI for eval output (e.g. gs://my-bucket/evals)"
         required: true
       agent_resource_name:
-        description: "Agent Runtime resource name (leave blank to use deployment_metadata.json)"
+        description: "Agent Runtime resource name (leave blank to use deployment_metadata.json)"  # yamllint disable-line rule:line-length
         required: false
         default: ""
 
@@ -28,7 +29,9 @@ jobs:
           workload_identity_provider: ${{ vars.WIF_PROVIDER }}
           service_account: ${{ vars.GHA_SERVICE_ACCOUNT }}
 
-      - uses: astral-sh/setup-uv@v8
+      # yamllint disable rule:line-length
+      - uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b  # v8.1.0
+        # yamllint enable rule:line-length
         with:
           python-version: "3.11"
 
