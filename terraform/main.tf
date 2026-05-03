@@ -77,8 +77,8 @@ locals {
   model_armor_template_name = "projects/${var.project_id}/locations/${var.agent_region}/templates/${local.model_armor_template_id}"
 
   # Resolve agent resource name: explicit var > deployment_metadata.json > ""
-  _metadata_file       = "${path.module}/../deployment_metadata.json"
-  _metadata            = try(jsondecode(file(local._metadata_file)), {})
+  _metadata_file = "${path.module}/../deployment_metadata.json"
+  _metadata      = try(jsondecode(file(local._metadata_file)), {})
   effective_agent_name = (
     var.agent_resource_name != ""
     ? var.agent_resource_name

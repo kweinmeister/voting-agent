@@ -69,12 +69,12 @@ resource "google_service_account_iam_member" "github_wif_binding" {
 # Permissions the CI/CD service account needs
 locals {
   gha_roles = var.github_repo != "" ? [
-    "roles/run.admin",                  # deploy Cloud Run services
-    "roles/artifactregistry.writer",    # push container images
-    "roles/cloudbuild.builds.editor",   # submit Cloud Build jobs
-    "roles/storage.admin",              # Cloud Build source upload
-    "roles/aiplatform.admin",           # deploy Agent Runtime
-    "roles/iam.serviceAccountUser",     # deploy Cloud Run with specific SA
+    "roles/run.admin",                # deploy Cloud Run services
+    "roles/artifactregistry.writer",  # push container images
+    "roles/cloudbuild.builds.editor", # submit Cloud Build jobs
+    "roles/storage.admin",            # Cloud Build source upload
+    "roles/aiplatform.admin",         # deploy Agent Runtime
+    "roles/iam.serviceAccountUser",   # deploy Cloud Run with specific SA
   ] : []
 }
 

@@ -57,7 +57,10 @@ def _list_monitors(token: str, project_id: str, location: str) -> list[dict]:
 
 
 def _create_monitor(
-    token: str, agent_resource: str, project_id: str, location: str,
+    token: str,
+    agent_resource: str,
+    project_id: str,
+    location: str,
 ) -> dict:
     url = f"https://{location}-aiplatform.googleapis.com/v1beta1/projects/{project_id}/locations/{location}/onlineEvaluators"
     body = {

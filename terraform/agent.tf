@@ -12,7 +12,7 @@ resource "null_resource" "agent_deploy" {
 
   triggers = {
     agent_hash = filemd5("${path.module}/../app/agent.py")
-    pyproject   = filemd5("${path.module}/../pyproject.toml")
+    pyproject  = filemd5("${path.module}/../pyproject.toml")
   }
 
   provisioner "local-exec" {

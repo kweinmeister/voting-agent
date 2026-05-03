@@ -1,4 +1,4 @@
-/** biome-ignore-all lint/correctness/noUnusedVariables: used in voting.js */
+// biome-ignore lint/correctness/noUnusedVariables: used in voting.js
 class StreamHandler {
 	constructor(url, onMessage, onComplete, onError) {
 		this.url = url;

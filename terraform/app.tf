@@ -101,9 +101,9 @@ resource "null_resource" "model_armor_template" {
 
 resource "null_resource" "model_armor_floor_settings" {
   triggers = {
-    project              = var.project_id
-    integrated_services  = "AI_PLATFORM"
-    enforcement          = "inspectAndBlock"
+    project             = var.project_id
+    integrated_services = "AI_PLATFORM"
+    enforcement         = "inspectAndBlock"
   }
 
   provisioner "local-exec" {
@@ -243,7 +243,7 @@ resource "null_resource" "apphub_workload" {
 
 resource "null_resource" "apphub_service" {
   triggers = {
-    service = "voting-agent-frontend"
+    service     = "voting-agent-frontend"
     application = "my-app"
   }
 

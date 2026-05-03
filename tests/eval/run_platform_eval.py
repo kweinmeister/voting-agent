@@ -115,9 +115,7 @@ def _print_per_prompt_results(gcs_dest: str, run_name: str) -> None:
                 for result in candidate.get("metricResults", {}).values():
                     score = result.get("score")
                     result.get("verdict", "")
-                    (
-                        f"{score:.3f}" if isinstance(score, float) else str(score)
-                    )
+                    (f"{score:.3f}" if isinstance(score, float) else str(score))
 
 
 def main() -> None:
@@ -180,7 +178,6 @@ def main() -> None:
             pass
         if run_results.summary_metrics.failed_items:
             pass
-
 
     _print_per_prompt_results(gcs_dest, run_name)
 

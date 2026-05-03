@@ -22,9 +22,9 @@ resource "google_project_iam_member" "cloud_run_modelarmor" {
 # Allow the Vertex AI service agent to call Model Armor so the floor-settings
 # integration can screen generateContent calls made inside Agent Engine.
 resource "google_project_iam_member" "aiplatform_modelarmor" {
-  project = var.project_id
-  role    = "roles/modelarmor.user"
-  member  = "serviceAccount:service-${data.google_project.project.number}@gcp-sa-aiplatform.iam.gserviceaccount.com"
+  project    = var.project_id
+  role       = "roles/modelarmor.user"
+  member     = "serviceAccount:service-${data.google_project.project.number}@gcp-sa-aiplatform.iam.gserviceaccount.com"
   depends_on = [google_project_service_identity.aiplatform]
 }
 
