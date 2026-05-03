@@ -172,7 +172,7 @@ def main() -> None:
         )
 
     run_results = eval_run.evaluation_run_results
-    run_name.split("/")[-1]
+    run_id = run_name.split("/")[-1]
     if (
         run_results
         and run_results.summary_metrics
