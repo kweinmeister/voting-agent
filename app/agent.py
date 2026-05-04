@@ -7,8 +7,16 @@ from google.adk.agents.callback_context import CallbackContext
 from google.adk.apps import App
 from google.adk.tools.preload_memory_tool import PreloadMemoryTool
 
-_, project_id = google.auth.default()
-os.environ["GOOGLE_CLOUD_PROJECT"] = project_id or ""
+try:
+    _, project_id = google.auth.default()
+    os.environ["GOOGLE_CLOUD_PROJECT"] = project_id or ""
+except google.auth.exceptions.DefaultCredentialsError:
+    logging.warning("Default credentials not found (expected in tests without ADC).")
+    os.environ["GOOGLE_CLOUD_PROJECT"] = os.environ.get(
+        "GOOGLE_CLOUD_PROJECT",
+        "placeholder-project",
+    )
+
 os.environ["GOOGLE_CLOUD_LOCATION"] = "global"
 os.environ["GOOGLE_GENAI_USE_VERTEXAI"] = "True"
 

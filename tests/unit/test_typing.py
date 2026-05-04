@@ -1,5 +1,7 @@
 """Unit tests for the Feedback Pydantic model."""
 
+import typing
+
 import pytest
 from pydantic import ValidationError
 
@@ -56,12 +58,14 @@ def test_text_accepts_none() -> None:
 
 def test_invalid_log_type() -> None:
     with pytest.raises(ValidationError):
-        Feedback(score=1, log_type="invalid")
+        kwargs = {"score": 1, "log_type": "invalid"}
+        Feedback(**typing.cast("typing.Any", kwargs))
 
 
 def test_invalid_service_name() -> None:
     with pytest.raises(ValidationError):
-        Feedback(score=1, service_name="wrong-service")
+        kwargs = {"score": 1, "service_name": "wrong-service"}
+        Feedback(**typing.cast("typing.Any", kwargs))
 
 
 def test_model_validate() -> None:

@@ -1,6 +1,7 @@
 """Unit tests for tests/eval/run_platform_eval.py — no GCP calls, all mocked."""
 
 import json
+from pathlib import Path
 from unittest.mock import MagicMock
 
 import pytest
@@ -55,10 +56,10 @@ class TestLoadAgentResourceName:
     def test_env_var_takes_priority_over_file(
         self,
         monkeypatch: pytest.MonkeyPatch,
-        tmp_path: pytest.TempPathFactory,
+        tmp_path: Path,
     ) -> None:
         monkeypatch.setenv("AGENT_RESOURCE_NAME", "from-env")
-        (tmp_path / "deployment_metadata.json").write_text(  # type: ignore[operator]
+        (tmp_path / "deployment_metadata.json").write_text(
             json.dumps({"remote_agent_runtime_id": "from-file"}),
         )
         assert load_agent_resource_name() == "from-env"
@@ -66,10 +67,10 @@ class TestLoadAgentResourceName:
     def test_falls_back_to_metadata_file(
         self,
         monkeypatch: pytest.MonkeyPatch,
-        tmp_path: pytest.TempPathFactory,
+        tmp_path: Path,
     ) -> None:
         monkeypatch.delenv("AGENT_RESOURCE_NAME", raising=False)
-        (tmp_path / "deployment_metadata.json").write_text(  # type: ignore[operator]
+        (tmp_path / "deployment_metadata.json").write_text(
             json.dumps(
                 {
                     "remote_agent_runtime_id": "projects/p/locations/l/reasoningEngines/r",
@@ -78,7 +79,7 @@ class TestLoadAgentResourceName:
         )
 
         class _FakeParents:
-            def __getitem__(self, _: int) -> pytest.TempPathFactory:
+            def __getitem__(self, _: int) -> Path:
                 return tmp_path
 
         class _FakePath:
@@ -95,12 +96,12 @@ class TestLoadAgentResourceName:
     def test_exits_when_no_source_available(
         self,
         monkeypatch: pytest.MonkeyPatch,
-        tmp_path: pytest.TempPathFactory,
+        tmp_path: Path,
     ) -> None:
         monkeypatch.delenv("AGENT_RESOURCE_NAME", raising=False)
 
         class _FakeParents:
-            def __getitem__(self, _: int) -> pytest.TempPathFactory:
+            def __getitem__(self, _: int) -> Path:
                 return tmp_path
 
         class _FakePath:
@@ -118,15 +119,15 @@ class TestLoadAgentResourceName:
     def test_exits_when_metadata_missing_key(
         self,
         monkeypatch: pytest.MonkeyPatch,
-        tmp_path: pytest.TempPathFactory,
+        tmp_path: Path,
     ) -> None:
         monkeypatch.delenv("AGENT_RESOURCE_NAME", raising=False)
-        (tmp_path / "deployment_metadata.json").write_text(  # type: ignore[operator]
+        (tmp_path / "deployment_metadata.json").write_text(
             json.dumps({"other_key": "value"}),
         )
 
         class _FakeParents:
-            def __getitem__(self, _: int) -> pytest.TempPathFactory:
+            def __getitem__(self, _: int) -> Path:
                 return tmp_path
 
         class _FakePath:

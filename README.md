@@ -300,6 +300,14 @@ To set up quality alerts (Slack/email notification when scores drop):
 
 The Cloud Run frontend and Agent Engine workload are registered in App Hub (`my-app`, us-central1), enabling the [Cloud Monitoring Application Topology](https://cloud.google.com/monitoring/docs/application-topology) view.
 
+> [!NOTE]
+> The initial Terraform deployment uses placeholder UUIDs for App Hub registration. To link the real discovered resources, wait for auto-discovery and run:
+> ```bash
+> gcloud apphub discovered-workloads list --location=us-central1
+> gcloud apphub discovered-services list --location=us-central1
+> ```
+> Then update the IDs in `terraform/app.tf` and run `terraform apply` again.
+
 To view the topology graph, grant yourself the `apptopology.viewer` role:
 
 ```bash

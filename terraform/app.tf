@@ -218,6 +218,10 @@ resource "google_cloud_run_v2_service" "frontend" {
 # Enables the Cloud Monitoring Topology view and apptopology.viewer access.
 # Idempotent: gcloud exits 0 if the resource already exists.
 
+# WARNING: The --discovered-workload ID below is a placeholder.
+# After initial deployment and auto-discovery, find the real ID with:
+#   gcloud apphub discovered-workloads list --location=us-central1
+# and replace the value below.
 resource "null_resource" "apphub_workload" {
   triggers = {
     agent_resource = local.effective_agent_name
@@ -241,6 +245,10 @@ resource "null_resource" "apphub_workload" {
   depends_on = [time_sleep.api_propagation]
 }
 
+# WARNING: The --discovered-service ID below is a placeholder.
+# After initial deployment and auto-discovery, find the real ID with:
+#   gcloud apphub discovered-services list --location=us-central1
+# and replace the value below.
 resource "null_resource" "apphub_service" {
   triggers = {
     service     = "voting-agent-frontend"
