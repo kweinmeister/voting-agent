@@ -97,25 +97,33 @@ def _print_per_prompt_results(gcs_dest: str, run_name: str) -> None:
             items.append(data)
 
     if not items:
+        print("no per-prompt result files found")
         return
 
     # Sort by prompt text for stable output order
     items.sort(key=lambda r: r.get("request", {}).get("prompt", {}).get("text", ""))
 
     for item in items:
-        item.get("request", {}).get("prompt", {}).get("text", "?")
+        prompt = item.get("request", {}).get("prompt", {}).get("text", "?")
+        print(f"\nPrompt: {prompt}")
         for candidate in item.get("request", {}).get("candidateResponses", []):
-            candidate.get("candidate", "?")
+            cand_name = candidate.get("candidate", "?")
+            print(f"  Candidate: {cand_name}")
             if "error" in candidate:
-                candidate["error"].get("code", "?")
+                code = candidate["error"].get("code", "?")
                 msg = candidate["error"].get("message", "")
-                msg.split(";")[0] if ";" in msg else msg
+                truncated_msg = msg.split(";")[0] if ";" in msg else msg
+                print(f"    ERROR: Code {code}: {truncated_msg}")
             else:
-                candidate.get("text", "")
-                for result in candidate.get("metricResults", {}).values():
+                text = candidate.get("text", "")
+                print(f"    Response: {text}")
+                for metric_name, result in candidate.get("metricResults", {}).items():
                     score = result.get("score")
-                    result.get("verdict", "")
-                    (f"{score:.3f}" if isinstance(score, float) else str(score))
+                    verdict = result.get("verdict", "")
+                    score_str = (
+                        f"{score:.3f}" if isinstance(score, float) else str(score)
+                    )
+                    print(f"    Metric: {metric_name} = {score_str} ({verdict})")
 
 
 def main() -> None:
@@ -166,18 +174,23 @@ def main() -> None:
         )
 
     run_results = eval_run.evaluation_run_results
-    run_name.split("/")[-1]
+    run_id = run_name.split("/")[-1]
     if (
         run_results
         and run_results.summary_metrics
         and run_results.summary_metrics.metrics
     ):
-        for _metric_name, _value in sorted(run_results.summary_metrics.metrics.items()):
-            pass
+        print("\nSummary Metrics:")
+        for metric_name, value in sorted(run_results.summary_metrics.metrics.items()):
+            print(f"  {metric_name}: {value}")
         if run_results.summary_metrics.total_items is not None:
-            pass
+            print(f"Total items: {run_results.summary_metrics.total_items}")
         if run_results.summary_metrics.failed_items:
-            pass
+            print(f"Failed items: {run_results.summary_metrics.failed_items}")
+
+    print(
+        f"\nView evaluation run in console: https://console.cloud.google.com/vertex-ai/locations/{eval_location}/evaluation-runs/{run_id}?project={project}"
+    )
 
     _print_per_prompt_results(gcs_dest, run_name)
 

@@ -25,6 +25,8 @@ try:
     _MODELARMOR_AVAILABLE = True
 except ImportError:
     _MODELARMOR_AVAILABLE = False
+    modelarmor_v1 = None
+    ClientOptions = None
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
