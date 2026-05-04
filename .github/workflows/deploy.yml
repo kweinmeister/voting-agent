@@ -54,7 +54,7 @@ jobs:
           workload_identity_provider: ${{ vars.WIF_PROVIDER }}
           service_account: ${{ vars.GHA_SERVICE_ACCOUNT }}
 
-      - uses: google-github-actions/setup-gcloud@v2
+      - uses: google-github-actions/setup-gcloud@v3
 
       - name: Build and push container image
         run: |
@@ -92,7 +92,7 @@ jobs:
           workload_identity_provider: ${{ vars.WIF_PROVIDER }}
           service_account: ${{ vars.GHA_SERVICE_ACCOUNT }}
 
-      - uses: google-github-actions/setup-gcloud@v2
+      - uses: google-github-actions/setup-gcloud@v3
 
       # yamllint disable rule:line-length
       - uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b  # v8.1.0
