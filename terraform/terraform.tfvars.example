@@ -1,0 +1,26 @@
+# Copy to terraform.tfvars and fill in your values.
+# terraform.tfvars is gitignored — never commit real project IDs to source control.
+
+project_id   = "your-project-id"
+region       = "us-central1"   # Cloud Run + Artifact Registry region
+agent_region = "us-east1"      # Must match where agents-cli deploys the Agent Runtime
+
+gemini_model = "gemini-3-flash-preview"
+
+# ── Agent Runtime ──────────────────────────────────────────────────────────────
+# Option A (recommended): run `agents-cli deploy` first, then terraform reads
+#   deployment_metadata.json automatically. Leave both settings below at defaults.
+#
+# Option B: set deploy_agent = true to have Terraform run agents-cli deploy for
+#   you. Adds ~10 minutes to the apply. Requires agents-cli installed.
+#   After the first apply, set this back to false to avoid re-deploying every time.
+#
+# Option C: paste the resource name directly (overrides the file).
+#   agent_resource_name = "projects/123456789/locations/us-east1/reasoningEngines/987654321"
+
+deploy_agent        = false
+agent_resource_name = ""
+
+# ── Access control ─────────────────────────────────────────────────────────────
+# Set to false and add IAP for private/internal deployments.
+allow_unauthenticated = true
