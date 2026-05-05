@@ -9,7 +9,7 @@ dependencies = [
     "fastapi>=0.136.1",
     "gcsfs>=2026.4.0",
     "google-adk>=1.31.1",
-    "google-cloud-aiplatform[agent-engines]>=1.148.1",
+    "google-cloud-aiplatform[agent-engines]>=1.149.0",
     "google-cloud-logging>=3.15.0",
     "google-cloud-modelarmor>=0.5.0",
     "jinja2>=3.1.6",
@@ -35,7 +35,7 @@ dev = [
 
 [project.optional-dependencies]
 eval = [
-    "google-cloud-aiplatform[evaluation]>=1.130.0",
+    "google-cloud-aiplatform[evaluation]>=1.149.0",
     "pandas>=2.0.0",
 ]
 lint = [
