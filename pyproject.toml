@@ -8,10 +8,10 @@ authors = [
 dependencies = [
     "fastapi>=0.136.1",
     "gcsfs>=2026.4.0",
-    "google-adk>=1.31.1",
-    "google-cloud-aiplatform[agent-engines]>=1.149.0",
+    "google-adk>=1.33.0",
+    "google-cloud-aiplatform[agent-engines]>=1.151.0",
     "google-cloud-logging>=3.15.0",
-    "google-cloud-modelarmor>=0.5.0",
+    "google-cloud-modelarmor>=0.6.0",
     "jinja2>=3.1.6",
     "opentelemetry-instrumentation-fastapi>=0.62b0",
     "opentelemetry-instrumentation-google-genai>=0.7b0",
@@ -35,7 +35,7 @@ dev = [
 
 [project.optional-dependencies]
 eval = [
-    "google-cloud-aiplatform[evaluation]>=1.149.0",
+    "google-cloud-aiplatform[evaluation]>=1.151.0",
     "pandas>=2.0.0",
 ]
 lint = [
