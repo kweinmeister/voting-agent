@@ -2139,7 +2139,7 @@ wheels = [
 
 [[package]]
 name = "opentelemetry-instrumentation-google-genai"
-version = "0.7b0"
+version = "0.7b1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "opentelemetry-api" },
@@ -2147,9 +2147,9 @@ dependencies = [
     { name = "opentelemetry-semantic-conventions" },
     { name = "opentelemetry-util-genai" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/3f/59/595e5ed05715c47cf49ac7e30d0a4cf6ed41e00524401c46c9d92b84623c/opentelemetry_instrumentation_google_genai-0.7b0.tar.gz", hash = "sha256:35158682dfd00201ef3864b47dda95d6062188e8a599ecabd383688e7eba2824", size = 52057, upload-time = "2026-02-20T21:56:23.116Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/5a/ca/da1a8d598542a3bd343859efc6e6e89b74b5189887b8f7ef447267e5e9ed/opentelemetry_instrumentation_google_genai-0.7b1.tar.gz", hash = "sha256:dc81249eb8a01184e2b3e0eb207864158e7147e3307b018dc9625b23973457a5", size = 52078, upload-time = "2026-05-19T01:46:07.689Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/bb/97/2c26687c6ea0747bb225ce7e5506f8f87e3e7ce4204c2900798177aa7792/opentelemetry_instrumentation_google_genai-0.7b0-py3-none-any.whl", hash = "sha256:b579d7bd3dda1aae1b76bfebbe86adcc88eadb2c08d11e864fbdecf370b19b25", size = 31402, upload-time = "2026-02-20T21:56:22.149Z" },
+    { url = "https://files.pythonhosted.org/packages/52/59/6c89d9c1c72ea321b2e3f6557fa58add59c61d0ba483d90955a7d9af4ec3/opentelemetry_instrumentation_google_genai-0.7b1-py3-none-any.whl", hash = "sha256:b7b3cda48efc9b9550dee76e4437a2f5e3b6877abffc4a6c336966eceb00f8b8", size = 31414, upload-time = "2026-05-19T01:46:06.393Z" },
 ]
 
 [[package]]
@@ -3508,7 +3508,7 @@ requires-dist = [
     { name = "google-cloud-modelarmor", specifier = ">=0.6.0" },
     { name = "jinja2", specifier = ">=3.1.6" },
     { name = "opentelemetry-instrumentation-fastapi", specifier = ">=0.62b0" },
-    { name = "opentelemetry-instrumentation-google-genai", specifier = ">=0.7b0" },
+    { name = "opentelemetry-instrumentation-google-genai", specifier = ">=0.7b1" },
     { name = "opentelemetry-instrumentation-grpc", specifier = ">=0.62b0" },
     { name = "opentelemetry-instrumentation-httpx", specifier = ">=0.62b0" },
     { name = "pandas", marker = "extra == 'eval'", specifier = ">=2.0.0" },
