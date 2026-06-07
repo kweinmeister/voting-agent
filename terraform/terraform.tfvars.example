@@ -24,3 +24,9 @@ agent_resource_name = ""
 # ── Access control ─────────────────────────────────────────────────────────────
 # Set to false and add IAP for private/internal deployments.
 allow_unauthenticated = true
+
+# ── CI/CD (GitHub Actions) ─────────────────────────────────────────────────────
+# Set this to your GitHub repository in "owner/repo" format to provision
+# Workload Identity Federation (WIF) resources for GitHub Actions CI/CD.
+# github_repo = "your-org/voting-agent"
+
