@@ -235,6 +235,17 @@ GitHub Actions authenticates to GCP via Workload Identity Federation — no long
 
 **1. Provision WIF resources with Terraform**
 
+Configure `github_repo` in `terraform.tfvars`:
+```hcl
+github_repo = "your-org/voting-agent"
+```
+And then run:
+```bash
+cd terraform
+terraform apply
+```
+
+Alternatively, pass it directly via the command line:
 ```bash
 cd terraform
 terraform apply -var="github_repo=your-org/voting-agent"
