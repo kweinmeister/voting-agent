@@ -730,9 +730,10 @@ wheels = [
 
 [[package]]
 name = "google-cloud-aiplatform"
-version = "1.156.0"
+version = "1.157.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
+    { name = "certifi" },
     { name = "docstring-parser" },
     { name = "google-api-core", extra = ["grpc"] },
     { name = "google-auth" },
@@ -746,9 +747,9 @@ dependencies = [
     { name = "pydantic" },
     { name = "typing-extensions" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/94/96/6a948c77bbc35783fbc49119349f8ecf8c943cd56a3cf4b1f5fde8da06e0/google_cloud_aiplatform-1.156.0.tar.gz", hash = "sha256:b2f8c92d7e3fd50a1570e433d596fb863f8ced528ede657e85d46e25b8445a25", size = 11056403, upload-time = "2026-06-04T17:44:47.932Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/e0/d9/e2a5f5a8535bbc8f68729796f3fc2d68d59a72818fb44f6544edbc2592e4/google_cloud_aiplatform-1.157.0.tar.gz", hash = "sha256:ce8413ed3584c4896f7656b663214c24e91c2c89426f1c91fbd1d220ffda23af", size = 11064992, upload-time = "2026-06-10T00:19:33.643Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/ec/ef/666a5f5e4212772813f64953cfb68f0275ec23aabdc27cd911dfae3ba18f/google_cloud_aiplatform-1.156.0-py2.py3-none-any.whl", hash = "sha256:ae78ee795b571d3801ac472e155ba66e7de9e7243ffe3092382329f230df5533", size = 9194083, upload-time = "2026-06-04T17:44:44.305Z" },
+    { url = "https://files.pythonhosted.org/packages/e3/82/3ec2ba56dc1fa71ef783348a0c519721879dbc8f1e568534e6d4b4856ccd/google_cloud_aiplatform-1.157.0-py2.py3-none-any.whl", hash = "sha256:0ca499ac5648988916fc089f9e94bd99667eefba13f6936475247f4a0bf86634", size = 9200777, upload-time = "2026-06-10T00:19:30.181Z" },
 ]
 
 [package.optional-dependencies]
@@ -876,7 +877,7 @@ wheels = [
 
 [[package]]
 name = "google-cloud-modelarmor"
-version = "0.6.0"
+version = "0.7.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "google-api-core", extra = ["grpc"] },
@@ -885,9 +886,9 @@ dependencies = [
     { name = "proto-plus" },
     { name = "protobuf" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/79/ee/fd1ff943dd8ac9d95b941df608c5c028604812f32c581a9e6e01bf24d52e/google_cloud_modelarmor-0.6.0.tar.gz", hash = "sha256:c139781669678693ec343fab735fb684cc624cd0b01cc46b49e4ceb61c99c113", size = 163326, upload-time = "2026-05-07T08:04:20.517Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/82/cd/992805c34262651b27a31e2807f47d1dad630df06c9d1037577e41823027/google_cloud_modelarmor-0.7.0.tar.gz", hash = "sha256:2ac62135620cdfc610ad9d9b3f92553de0d27343b693f021fd2012f1898d4ac6", size = 166306, upload-time = "2026-06-12T18:03:24.055Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/ad/c9/e0823ae436aa3a8d88ec52708d1b2f79fac646c4c3f40e8f807e4afdecbb/google_cloud_modelarmor-0.6.0-py3-none-any.whl", hash = "sha256:a6607caf764ad56a49524f8a0e7cd8fc45031d2b65a879f2739cef8565f0e457", size = 140880, upload-time = "2026-05-07T08:02:53.347Z" },
+    { url = "https://files.pythonhosted.org/packages/34/d1/ca292cb90e107d29fdb33912f96437965e3ca27e3d76831852dde5527f93/google_cloud_modelarmor-0.7.0-py3-none-any.whl", hash = "sha256:a3cf05b1e6bc95ea3dd3cc3f8e19b5fdd12a249ac25b61650c32b0206e60038f", size = 142088, upload-time = "2026-06-12T18:03:05.397Z" },
 ]
 
 [[package]]
@@ -2927,10 +2928,10 @@ requires-dist = [
     { name = "fastapi", specifier = ">=0.136.1" },
     { name = "gcsfs", specifier = ">=2026.5.0" },
     { name = "google-adk", specifier = ">=2.2.0" },
-    { name = "google-cloud-aiplatform", extras = ["agent-engines"], specifier = ">=1.156.0" },
-    { name = "google-cloud-aiplatform", extras = ["evaluation"], marker = "extra == 'eval'", specifier = ">=1.156.0" },
+    { name = "google-cloud-aiplatform", extras = ["agent-engines"], specifier = ">=1.157.0" },
+    { name = "google-cloud-aiplatform", extras = ["evaluation"], marker = "extra == 'eval'", specifier = ">=1.157.0" },
     { name = "google-cloud-logging", specifier = ">=3.16.0" },
-    { name = "google-cloud-modelarmor", specifier = ">=0.6.0" },
+    { name = "google-cloud-modelarmor", specifier = ">=0.7.0" },
     { name = "jinja2", specifier = ">=3.1.6" },
     { name = "opentelemetry-instrumentation-fastapi", specifier = ">=0.62b0" },
     { name = "opentelemetry-instrumentation-google-genai", specifier = ">=0.7b1" },
