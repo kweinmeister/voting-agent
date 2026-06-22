@@ -15,7 +15,7 @@ jobs:
       frontend: ${{ steps.filter.outputs.frontend }}
       agent: ${{ steps.filter.outputs.agent }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: dorny/paths-filter@v4
         id: filter
         with:
@@ -46,7 +46,7 @@ jobs:
       IMAGE: us-central1-docker.pkg.dev/${{ vars.GCP_PROJECT_ID }}/voting-agent/voting-agent-frontend:${{ github.sha }}  # yamllint disable-line rule:line-length
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v3
@@ -84,7 +84,7 @@ jobs:
       agent_resource_name: ${{ steps.get-agent-id.outputs.agent_resource_name }}
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v3
@@ -137,7 +137,7 @@ jobs:
       id-token: write
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v3
