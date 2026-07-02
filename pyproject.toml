@@ -6,7 +6,7 @@ authors = [
     {name = "kweinmeister", email = "kweinmeister@google.com"},
 ]
 dependencies = [
-    "fastapi>=0.136.1",
+    "fastapi>=0.137.0",
     "gcsfs>=2026.5.0",
     "google-adk>=2.2.0",
     "google-cloud-aiplatform[agent-engines]>=1.156.0",
