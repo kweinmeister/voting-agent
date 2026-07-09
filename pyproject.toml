@@ -7,7 +7,7 @@ authors = [
 ]
 dependencies = [
     "fastapi>=0.139.0",
-    "gcsfs>=2026.5.0",
+    "gcsfs>=2026.7.0",
     "google-adk>=2.3.0",
     "google-cloud-aiplatform[agent-engines]>=1.159.0",
     "google-cloud-logging>=3.16.0",
