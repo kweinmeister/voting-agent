@@ -6,10 +6,10 @@ authors = [
     {name = "kweinmeister", email = "kweinmeister@google.com"},
 ]
 dependencies = [
-    "fastapi>=0.137.0",
+    "fastapi>=0.139.0",
     "gcsfs>=2026.5.0",
     "google-adk>=2.3.0",
-    "google-cloud-aiplatform[agent-engines]>=1.158.0",
+    "google-cloud-aiplatform[agent-engines]>=1.159.0",
     "google-cloud-logging>=3.16.0",
     "google-cloud-modelarmor>=0.7.0",
     "jinja2>=3.1.6",
@@ -27,7 +27,7 @@ requires-python = ">=3.11,<3.14"
 [dependency-groups]
 dev = [
     "nest-asyncio>=1.6.0",
-    "pytest>=9.1.0",
+    "pytest>=9.1.1",
     "pytest-asyncio>=1.4.0",
     "pytest-cov>=7.1.0",
     "types-requests",
@@ -35,7 +35,7 @@ dev = [
 
 [project.optional-dependencies]
 eval = [
-    "google-cloud-aiplatform[evaluation]>=1.158.0",
+    "google-cloud-aiplatform[evaluation]>=1.159.0",
     "pandas>=3.0.3",
 ]
 lint = [
