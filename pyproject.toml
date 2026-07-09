@@ -27,7 +27,7 @@ requires-python = ">=3.11,<3.14"
 [dependency-groups]
 dev = [
     "nest-asyncio>=1.6.0",
-    "pytest>=9.1.0",
+    "pytest>=9.1.1",
     "pytest-asyncio>=1.4.0",
     "pytest-cov>=7.1.0",
     "types-requests",
