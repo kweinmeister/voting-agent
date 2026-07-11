@@ -2,6 +2,7 @@ import logging
 import os
 
 import google.auth
+import google.auth.exceptions
 from google.adk.agents import Agent
 from google.adk.agents.callback_context import CallbackContext
 from google.adk.apps import App
