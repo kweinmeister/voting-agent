@@ -39,7 +39,7 @@ eval = [
     "pandas>=3.0.3",
 ]
 lint = [
-    "codespell>=2.4.2",
+    "codespell>=2.4.3",
     "ruff>=0.15.21",
     "ty>=0.0.56",
 ]
