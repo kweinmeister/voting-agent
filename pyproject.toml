@@ -36,7 +36,7 @@ dev = [
 [project.optional-dependencies]
 eval = [
     "google-cloud-aiplatform[evaluation]>=1.161.0",
-    "pandas>=3.0.3",
+    "pandas>=3.0.5",
 ]
 lint = [
     "codespell>=2.4.3",
