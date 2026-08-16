@@ -41,7 +41,7 @@ eval = [
 lint = [
     "codespell>=2.4.3",
     "ruff>=0.16.1",
-    "ty>=0.0.61",
+    "ty>=0.0.71",
 ]
 
 [tool.ruff]
