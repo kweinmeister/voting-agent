@@ -639,7 +639,7 @@ wheels = [
 
 [[package]]
 name = "google-adk"
-version = "2.6.3"
+version = "2.7.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "aiohttp" },
@@ -668,9 +668,9 @@ dependencies = [
     { name = "watchdog" },
     { name = "websockets" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/5e/5a/a8a1fd24f8bfdbd64e54e1ae954ddb272d1debc61a7a69ce4a8277c70e32/google_adk-2.6.3.tar.gz", hash = "sha256:a5f290ead5f8893ad3aaf3c7a0053893624c82ff5c447c90800904f633a8c72d", size = 3721520, upload-time = "2026-08-07T21:18:44.149Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/fb/50/cc4b5563222fab77ee7f95367e2e6bc0663ef74b62e0b519e2028157cb0d/google_adk-2.7.0.tar.gz", hash = "sha256:283e16dc5ffab7684e17098f7282470339e88a3d16ecfa62b4025680672c906b", size = 3806369, upload-time = "2026-08-13T22:22:06.379Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/e4/37/bab5ae6d5ac57a04bfae128f755c56e2d878a7d9dcdbd461282baf19344a/google_adk-2.6.3-py3-none-any.whl", hash = "sha256:3c53fc7885bbc00f98fe90e30474ad7ef7d1ccdc4dd7aa0be154721e61295f04", size = 4305269, upload-time = "2026-08-07T21:18:41.71Z" },
+    { url = "https://files.pythonhosted.org/packages/d3/6e/c97d9fe60a47f605aa5013a28ef76beef573f3d96a356532e840fa05ee20/google_adk-2.7.0-py3-none-any.whl", hash = "sha256:6517c0383d9449484b6398a5b60c6408dbd4de369e957eebc3b9d8d0c90736e9", size = 4395958, upload-time = "2026-08-13T22:22:04.119Z" },
 ]
 
 [[package]]
@@ -968,7 +968,7 @@ wheels = [
 
 [[package]]
 name = "google-genai"
-version = "2.11.0"
+version = "2.12.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "anyio" },
@@ -982,9 +982,9 @@ dependencies = [
     { name = "typing-extensions" },
     { name = "websockets" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/a6/01/e7b5f3aac89200c78318ed7643401e7f5ed3131b0cd353c07483606b1e61/google_genai-2.11.0.tar.gz", hash = "sha256:4c5e524d24b145c96be327f9a7f8f04b0fe4efee0533877795e9848afed01749", size = 622366, upload-time = "2026-07-09T17:49:43.862Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/96/59/9ea84cbeb8f09694564d3b0ee9dd59003551b308d47b61f251415df93982/google_genai-2.12.1.tar.gz", hash = "sha256:78c25217885d63dc430ca7c4526853512b164a25a93a8a0d0af5b85971aa1db0", size = 636710, upload-time = "2026-07-16T16:15:02.035Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/93/ef/d296c23390160a8b0b1dafb36dd3cb36a39ed40c81cd27e04e6233334186/google_genai-2.11.0-py3-none-any.whl", hash = "sha256:5bc8186100e1d34d691fbe0cba392b7e04e98d286ca952323a6672d054accf95", size = 984162, upload-time = "2026-07-09T17:49:42.15Z" },
+    { url = "https://files.pythonhosted.org/packages/b6/b4/1369fb413fc2ba7f78acace5590b6e9990c52ab5d1d166aafaa1ae2c28c8/google_genai-2.12.1-py3-none-any.whl", hash = "sha256:686d5ec39bda345151d3ed1bac3915f01f49138b1ea519af2eb98f11cc55ebc4", size = 1023403, upload-time = "2026-07-16T16:14:59.79Z" },
 ]
 
 [[package]]
@@ -2905,7 +2905,7 @@ requires-dist = [
     { name = "codespell", marker = "extra == 'lint'", specifier = ">=2.4.3" },
     { name = "fastapi", specifier = ">=0.140.0" },
     { name = "gcsfs", specifier = ">=2026.7.0" },
-    { name = "google-adk", specifier = ">=2.6.3" },
+    { name = "google-adk", specifier = ">=2.7.0" },
     { name = "google-cloud-aiplatform", extras = ["agent-engines"], specifier = ">=1.164.0" },
     { name = "google-cloud-aiplatform", extras = ["evaluation"], marker = "extra == 'eval'", specifier = ">=1.164.0" },
     { name = "google-cloud-logging", specifier = ">=3.16.2" },
