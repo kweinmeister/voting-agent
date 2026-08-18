@@ -21,7 +21,7 @@ except google.auth.exceptions.DefaultCredentialsError:
 os.environ["GOOGLE_CLOUD_LOCATION"] = "global"
 os.environ["GOOGLE_GENAI_USE_VERTEXAI"] = "True"
 
-GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-3-flash-preview")
+GEMINI_MODEL = os.environ.get("GEMINI_MODEL", "gemini-3.7-flash")
 
 VOTING_INSTRUCTION = """You are a Voting Agent specializing in marketing copywriting.
 
