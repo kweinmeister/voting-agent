@@ -5,7 +5,7 @@ project_id   = "your-project-id"
 region       = "us-central1"   # Cloud Run + Artifact Registry region
 agent_region = "us-east1"      # Must match where agents-cli deploys the Agent Runtime
 
-gemini_model = "gemini-3-flash-preview"
+gemini_model = "gemini-3.7-flash"
 
 # ── Agent Runtime ──────────────────────────────────────────────────────────────
 # Option A (recommended): run `agents-cli deploy` first, then terraform reads

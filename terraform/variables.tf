@@ -18,7 +18,7 @@ variable "agent_region" {
 variable "gemini_model" {
   description = "Gemini model used by the voting agent"
   type        = string
-  default     = "gemini-3-flash-preview"
+  default     = "gemini-3.7-flash"
 }
 
 variable "agent_resource_name" {

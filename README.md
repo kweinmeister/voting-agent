@@ -201,7 +201,7 @@ gcloud run deploy voting-agent-frontend \
 | `AGENT_RESOURCE_NAME` | Production only | Full resource name of the deployed Agent Runtime |
 | `GOOGLE_CLOUD_PROJECT` | Yes | GCP project ID |
 | `GOOGLE_CLOUD_LOCATION` | Yes | Region for Vertex AI calls (e.g. `us-central1`) |
-| `GEMINI_MODEL` | No | Model to use (default: `gemini-3-flash-preview`) |
+| `GEMINI_MODEL` | No | Model to use (default: `gemini-3.7-flash`) |
 | `LOGS_BUCKET_NAME` | No | GCS bucket name for prompt/response audit logging. When set, content is uploaded to GCS instead of embedded in Cloud Trace events. |
 
 If `AGENT_RESOURCE_NAME` is not set, the frontend runs the agent in-process (local dev mode).
