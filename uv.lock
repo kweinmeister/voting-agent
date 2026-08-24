@@ -1721,7 +1721,7 @@ wheels = [
 
 [[package]]
 name = "opentelemetry-instrumentation-google-genai"
-version = "1.0b1"
+version = "1.1b0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "opentelemetry-api" },
@@ -1730,9 +1730,9 @@ dependencies = [
     { name = "opentelemetry-util-genai" },
     { name = "wrapt" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/7c/13/a2422f9164c09406092576d878d9b23d74b0a2ed75c1a77454c3a0178eb1/opentelemetry_instrumentation_google_genai-1.0b1.tar.gz", hash = "sha256:784b3a473ed51033837114b96854b31a0f0b0fe7c81e132e58a45352eee3b102", size = 104473, upload-time = "2026-07-13T19:01:35.403Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/6d/84/433d318cfbd6d245003e7ea9b5bc7118f9b4cb79a1d7306ac47f50ffc13e/opentelemetry_instrumentation_google_genai-1.1b0.tar.gz", hash = "sha256:af7558056687cfe740fda593820f9dcb76d0b8d8b1ad0841f853602bd4ba2d4b", size = 108003, upload-time = "2026-08-20T17:24:36.506Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/07/a3/315330fb955d5caea51793c4f49d8904fcade3927b3512fdc0595b3b701a/opentelemetry_instrumentation_google_genai-1.0b1-py3-none-any.whl", hash = "sha256:50789eebf4ce38dc09147e28bdbd96d45550c7f479232c593c0ddbdab37cf97f", size = 28010, upload-time = "2026-07-13T19:01:34.051Z" },
+    { url = "https://files.pythonhosted.org/packages/cc/5e/c18f160ebfad44c1681ad443e102ce5dc4e0aac5925213d81cfbafad87a2/opentelemetry_instrumentation_google_genai-1.1b0-py3-none-any.whl", hash = "sha256:4adaca002cc28fccbec4d8cca1ab24754d4449dac16e9a2b5610496db925d588", size = 29359, upload-time = "2026-08-20T17:24:35.105Z" },
 ]
 
 [[package]]
