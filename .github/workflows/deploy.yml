@@ -61,6 +61,7 @@ jobs:
           gcloud builds submit . \
             --tag=${{ env.IMAGE }} \
             --project=${{ vars.GCP_PROJECT_ID }} \
+            --suppress-logs \
             --quiet
 
       - name: Deploy to Cloud Run
