@@ -42,7 +42,12 @@ MODEL_ARMOR_TEMPLATE = os.environ.get("MODEL_ARMOR_TEMPLATE")
 MODEL_ARMOR_LOCATION = os.environ.get("MODEL_ARMOR_LOCATION", "us-central1")
 
 
-if _MODELARMOR_AVAILABLE and MODEL_ARMOR_TEMPLATE:
+if (
+    _MODELARMOR_AVAILABLE
+    and MODEL_ARMOR_TEMPLATE
+    and ClientOptions is not None
+    and modelarmor_v1 is not None
+):
     _modelarmor_client = modelarmor_v1.ModelArmorClient(
         transport="rest",
         client_options=ClientOptions(
