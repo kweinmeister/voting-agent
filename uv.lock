@@ -1,5 +1,5 @@
 version = 1
-revision = 3
+revision = 5
 requires-python = ">=3.11, <3.14"
 resolution-markers = [
     "python_full_version >= '3.13' and sys_platform == 'win32'",
@@ -860,7 +860,7 @@ wheels = [
 
 [[package]]
 name = "google-cloud-modelarmor"
-version = "0.7.2"
+version = "0.7.3"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "google-api-core", extra = ["grpc"] },
@@ -869,9 +869,9 @@ dependencies = [
     { name = "proto-plus" },
     { name = "protobuf" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/8d/68/6a109ae46d3e22b9572996be85762cbed244d24165cc361214a0a2204043/google_cloud_modelarmor-0.7.2.tar.gz", hash = "sha256:31dff476580b7ea2eff3889e1169d6b4521aa51885a7abcc369e522b3ac22abf", size = 168839, upload-time = "2026-10-01T18:17:13.992Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/0b/99/fd41067d1ce225056e9c3785d31a8457e57622650a6ef7a0e46d31056d87/google_cloud_modelarmor-0.7.3.tar.gz", hash = "sha256:587ae2fe427222561eb95dcf170f842a05251a87b1a3f7d019ddd3bcb0575771", size = 170938, upload-time = "2026-10-22T23:43:27.721Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/93/55/98723ed4e82678ee8c3928e2b769eb56c0d47314569f8b14ee2fff0294b8/google_cloud_modelarmor-0.7.2-py3-none-any.whl", hash = "sha256:fa98c39c3847fd653dc0c15662bbfc7ca00d23438d9a62c7c4048911b18c6a03", size = 144346, upload-time = "2026-10-01T18:11:05.111Z" },
+    { url = "https://files.pythonhosted.org/packages/4b/a8/b5d64e5f0f24f44919375e1aa81e452d2ba9635d5c82c736c3ba394939a3/google_cloud_modelarmor-0.7.3-py3-none-any.whl", hash = "sha256:b3ac496d04a11aec1d6d626b9579c2d155c940aa14af46dc176a9f72954a5c6f", size = 146447, upload-time = "2026-10-22T23:42:58.658Z" },
 ]
 
 [[package]]
